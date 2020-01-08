@@ -100,10 +100,17 @@ server {
     "text/css;charset=utf-8" text/css
     "text/plain;charset=utf-8" text/plain;
 
-    location ~ (\.js|\.css|\.gif|\.woff|\.ttf|\.eot|\.ico|(/dhis-web-commons/|/images/|/icons/).*\.png)$ {
+    location ~ (\.js|\.css|\.gif|\.ico|(/dhis-web-commons/|/images/|/icons/).*\.png)$ {
       add_header  Cache-Control public;
       expires     14d;
+   
     }
+
+    location ~ (\.woff|\.ttf|\.eot)$ {
+      add_header  Cache-Control no-cache;
+    
+    }
+
 
 	# SSL configuration
 	#
@@ -181,6 +188,17 @@ server {
     root /ROOT;
     server_name sante.seie-madagascar.org;
     return 404; # managed by Certbot
+
+    location ~ (\.js|\.css|\.gif|\.ico|(/dhis-web-commons/|/images/|/icons/).*\.png)$ {
+      add_header  Cache-Control public;
+      expires     14d;
+
+    }
+
+    location ~ (\.woff|\.ttf|\.eot)$ {
+      add_header  Cache-Control no-cache;
+
+    }
 
 
 }
